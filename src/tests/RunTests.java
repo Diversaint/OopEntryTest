@@ -4,9 +4,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import task.TextUtils;
 
-/**
- * Created by Vorobiei on 18.05.2016.
- */
 public class RunTests {
 
     @Test

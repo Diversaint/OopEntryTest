@@ -28,8 +28,14 @@ public class TextUtils {
 
 //        TODO write your code here
 
+        // check null and length of string
+        if (text == null || text.length() == 0)
+            return new String[0];
 
-        return null;
+        // Do
+        String[] words = text.split("; ");
+
+        return words;
     }
     /**
      * @param words array with words
@@ -38,8 +44,37 @@ public class TextUtils {
     public static String[] getUniqueWords(String[] words) {
 
 //        TODO write your code here
+        //check null and array length
+        if (words == null || words.length == 0)
+            return new String[0];
 
-        return null;
+        int counterOfUniqueWords = 0;
+        String[] tempWords = new String[words.length];
+
+        for (int i = 0; i < words.length; i++) {
+            if (!checkEquals(words[i], tempWords)) {
+                tempWords[counterOfUniqueWords++] = words[i];
+            }
+        }
+
+
+        return cutAndCopyWords(counterOfUniqueWords, tempWords);
+    }
+
+    private static String[] cutAndCopyWords(int counterOfUniqueWords, String[] tempWords) {
+        String[] result = new String[counterOfUniqueWords];
+        for (int i = 0; i < counterOfUniqueWords; i++) {
+            result[i] = tempWords[i];
+        }
+        return result;
+    }
+
+    private static boolean checkEquals (String word, String[] words) {
+        for (int i = 0; i < words.length; i++) {
+            if (word.equals(words[i]))
+                return true;
+        }
+        return false;
     }
 
      /**
@@ -49,10 +84,23 @@ public class TextUtils {
     public static String[] sortWords(String[] uniqueWords) {
 
 //        TODO write your code here
+        //check for null
+        if (uniqueWords == null)
+            return new String[0];
 
+        //do
 
+        String tempWord = "";
+        for (int i = 0; i < uniqueWords.length - 1; i++) {
+            for (int j = i + 1; j < uniqueWords.length; j++) {
+                if (uniqueWords[i].compareTo(uniqueWords[j]) > 0) {
+                    tempWord = uniqueWords[i];
+                    uniqueWords[i] = uniqueWords[j];
+                    uniqueWords[j] = tempWord;
+                }
+            }
+        }
 
-
-        return null;
+        return getUniqueWords(uniqueWords);
     }
 }
